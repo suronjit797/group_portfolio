@@ -1,24 +1,24 @@
 import { RequestHandler } from "express";
-import eventServices from "./event.service";
+import blogServices from "./blog.service";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { paginationHelper } from "../../../helper/paginationHelper";
 import filterHelper from "../../../helper/filterHelper";
-import EventModel from "./event.model";
+import BlogsModel from "./blog.model";
 import globalController from "../../global/global.controller";
 
 // variables
-const name = "Event";
+const name = "Blog";
 // global
-const globalControllers = globalController(eventServices, name);
+const globalControllers = globalController(blogServices, name);
 
 // custom
 export const getAll: RequestHandler = async (req, res, next) => {
   try {
     const pagination = paginationHelper(req.query);
-    const filter = filterHelper(req, new EventModel(), ["title", "type"]);
+    const filter = filterHelper(req, new BlogsModel(), ["title", "blog"]);
 
-    const { data, meta } = await eventServices.getAll(pagination, filter);
+    const { data, meta } = await blogServices.getAll(pagination, filter);
 
     const payload = {
       success: true,
@@ -32,5 +32,5 @@ export const getAll: RequestHandler = async (req, res, next) => {
   }
 };
 
-const eventController: any = { ...globalControllers, getAll };
-export default eventController;
+const transactionsController: any = { ...globalControllers, getAll };
+export default transactionsController;

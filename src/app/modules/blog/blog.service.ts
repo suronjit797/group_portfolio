@@ -1,0 +1,11 @@
+import BlogsModel from "./blog.model";
+import globalService from "../../global/global.service";
+
+// global services
+const globalServices = globalService(BlogsModel);
+
+// rest services
+
+const blogServices = { ...globalServices };
+
+export default blogServices;

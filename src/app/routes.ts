@@ -25,14 +25,18 @@ moduleRoute.forEach((route) =>
 // upload
 // router.post("/upload", auth(), upload.single("photos"), uploadToBunny);
 router.post("/upload", upload.single("photos"), (req, res, next) => {
-  res.send({
-    success: true,
-    message: "File uploaded successfully",
-    data: {
-      uri: "/uploads/images/" + req.file?.filename,
-    },
-  });
-  console.log(req.file);
+  try {
+    const fullUrl = `${req.protocol}://${req.hostname}:${process.env.PORT || 3000}`;
+    res.send({
+      success: true,
+      message: "File uploaded successfully",
+      data: {
+        uri: `${fullUrl}/uploads/images/${req.file?.filename}`,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;

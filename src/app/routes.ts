@@ -1,7 +1,7 @@
 import express from "express";
 import userRouter from "./modules/user/user.routes";
 import upload from "../helper/uploads";
-import uploadToBunny from "./middleware/uploadToBunny";
+// import uploadToBunny from "./middleware/uploadToBunny";
 import { auth } from "./middleware/auth";
 import blogRouter from "./modules/blog/blog.routes";
 import workRouter from "./modules/work/work.routes";
@@ -24,5 +24,6 @@ moduleRoute.forEach((route) =>
 
 // upload
 // router.post("/upload", auth(), upload.single("photos"), uploadToBunny);
+router.post("/upload", auth(), upload.single("photos"));
 
 export default router;

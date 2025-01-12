@@ -4,7 +4,7 @@ export type TWork = {
   title: string;
   description: string;
   category: string;
-  user: ObjectId;
+  users: ObjectId[];
   image: string;
 };
 

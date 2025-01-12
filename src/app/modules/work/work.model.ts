@@ -15,10 +15,10 @@ const workSchema = new Schema<TWork>(
       type: String,
       required: true,
     },
-    user: {
+    users: [{
       type: Schema.ObjectId,
       required: true,
-    },
+    }],
     image: String,
   },
   { timestamps: true }
